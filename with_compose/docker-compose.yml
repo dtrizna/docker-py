@@ -1,0 +1,25 @@
+version: "3.9"
+services:
+  triznadm-lb:
+    build: /home/cecuser/Project/load-balancer-docker/
+    image: triznadm-lb:1.1
+    ports:
+      - "80:80"
+    environment: 
+      - HTTP_SERVERS=3
+    container_name: triznadm-lb
+  triznadm-http1:
+    build: /home/cecuser/Project/http-server-docker/
+    image: triznadm-http:1.0
+    container_name: triznadm-http1
+  triznadm-http2:
+    image: triznadm-http:1.0
+    container_name: triznadm-http2
+  triznadm-http3:
+    image: triznadm-http:1.0
+    container_name: triznadm-http3
+  triznadm-redis:
+    image: "redis:latest"
+    volumes:
+      - /var/cec/redis.rdb:/data/dump.rdb
+    container_name: triznadm-redis
